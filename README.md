@@ -11,3 +11,22 @@ While this architecture provides data isolation and speed, it does not scale so 
 tenants/clients on the app is small, this design is effective but when tenants are larger, resources compromisation is
 bound to occur. The number of tables increases, the number of queries increase, so is the size of these tables. Thus,
 there is a need for continued scaling of resources as more tenants are added.
+
+![](multitenancy.png)
+
+## Multi-Tenant Database advantages:
+
+- The highest level of tenant isolation and data security – data remains invisible to other users,
+- Maintenance and development jobs are simplified,
+- Can easily manage specific user’s data,
+- No unnecessary query complexity,
+- Reduced client responsibility,
+- Cloud environments can scale out and scale up because tenants can be spread over multiple servers.
+
+## Multi-Tenant Database Problems
+
+- Potentially more servers to patch and maintain,
+- As the number of tenants grows, there will be more databases being created,
+- Maintain a registry of tenant-db mappings code can lead to added complexity,
+- Application data shared by all tenants (i.e., dictionaries) in this type of multi-tenant system must be duplicated in
+  each database or need to be extracted to another one that will be used by all tenants.

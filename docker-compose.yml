@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  db_tenant_1:
+    image: 'postgres'
+    container_name: db_tenant_1
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/tenant_1
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+    volumes:
+      - ../docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
+  
+  db_tenant_2:
+    image: 'postgres'
+    container_name: db_tenant_2
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/tenant_2
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+    volumes:
+      - ../docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
