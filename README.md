@@ -40,6 +40,49 @@ there is a need for continued scaling of resources as more tenants are added.
 3. Once we know the `tenant_id`, we can determine which dataSource to use;
 4. `TenantRoutingDataSource.determineCurrentLookupKey()` determines the datasource based on the `tenant_id`, because it
    overrides the `AbstractRoutingDataSource.determineCurrentLookupKey()` which selects from the map of possible
-   `dataSources` the one that matches the current tenant_id, if none matches it will throw an exception. 
+   `dataSources` the one that matches the current tenant_id, if none matches it will throw an exception.
 
 ![](determine_dataSource.png)
+
+# Hikari with Spring Boot
+
+**HikariCP** is a reliable, high-performance JDBC connection pool. It is much faster, lightweight and have better
+performance as compare to other connection pool API. Because of all these compelling reasons, HikariCP is now the
+default pool implementation in Spring Boot 2.
+
+Default values set for Hikari properties:
+
+- allowPoolSuspension.............false
+- autoCommit......................true
+- catalog.........................none
+- connectionInitSql...............none
+- connectionTestQuery.............none
+- connectionTimeout...............30000
+- dataSource......................none
+- dataSourceClassName.............none
+- dataSourceJNDI..................none
+- dataSourceProperties............{password=<password>}
+- driverClassName................."com.mysql.cj.jdbc.Driver"
+- exceptionOverrideClassName......none
+- healthCheckProperties...........{}
+- healthCheckRegistry.............none
+- idleTimeout.....................600000
+- initializationFailTimeout.......1
+- isolateInternalQueries..........false
+- jdbcUrl.........................jdbc:mysql://<server>:<port>/<db>
+- leakDetectionThreshold..........0
+- maxLifetime.....................1800000
+- maximumPoolSize.................10
+- metricRegistry..................none
+- metricsTrackerFactory...........none
+- minimumIdle.....................10
+- password........................<masked>
+- poolName........................"MyAppDataSourcePool"
+- readOnly........................false
+- registerMbeans..................false
+- scheduledExecutor...............none
+- schema..........................none
+- threadFactory...................internal
+- transactionIsolation............default
+- username........................"username"
+- validationTimeout...............5000

@@ -10,7 +10,18 @@ spring:
       ddl-auto: none
   flyway:
     enabled: false
-    
+  sql:
+    init:
+      mode: always
+  datasource:
+    hikari:
+      connection-timeout: 20000 # maximum number of milliseconds that a client will wait for a connection
+      maximumPoolSize: 5 # the maximum number of connections in the pool
+      minimum-idle: 5 # minimum number of idle connections maintained by HikariCP in a connection pool
+      idle-timeout: 10000 # the number of seconds the pool will allow a connection to remain idle before closing it
+      max-lifetime: 1000 # maximum lifetime in milliseconds of a connection in the pool after it is closed
+      auto-commit: true # controls the default auto-commit behavior of connections returned from the pool (default true)
+
 tenants:
   datasources:
     tenant_1:
