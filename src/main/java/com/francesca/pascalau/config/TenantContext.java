@@ -14,6 +14,11 @@ public class TenantContext {
         currentTenant.set(tenant);
     }
 
+    /**
+     * 3. Find the current tenant_id that was set before handling the current request
+     *
+     * @return
+     */
     public static String getCurrentTenant() {
         return currentTenant.get();
     }

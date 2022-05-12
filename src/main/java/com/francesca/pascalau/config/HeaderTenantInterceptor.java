@@ -10,6 +10,11 @@ public class HeaderTenantInterceptor implements WebRequestInterceptor {
 
     public static final String TENANT_HEADER = "X-TenantID";
 
+    /**
+     * 1. When a request is intercepted by the application, the header is checked so we can set the current tenant_id
+     *
+     * @param request the current web request
+     */
     @Override
     public void preHandle(WebRequest request) {
         TenantContext.setCurrentTenant(request.getHeader(TENANT_HEADER));

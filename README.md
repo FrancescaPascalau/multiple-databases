@@ -30,3 +30,16 @@ there is a need for continued scaling of resources as more tenants are added.
 - Maintain a registry of tenant-db mappings code can lead to added complexity,
 - Application data shared by all tenants (i.e., dictionaries) in this type of multi-tenant system must be duplicated in
   each database or need to be extracted to another one that will be used by all tenants.
+
+## Implementation flow
+
+1. When the application starts, for each one of the databases a `dataSource` will be added to a map that contains all of
+   them together;
+2. Afterwards, for each request that the app receives, based on the `tenant_id` set in the request's header, the current
+   tenant will be determined;
+3. Once we know the `tenant_id`, we can determine which dataSource to use;
+4. `TenantRoutingDataSource.determineCurrentLookupKey()` determines the datasource based on the `tenant_id`, because it
+   overrides the `AbstractRoutingDataSource.determineCurrentLookupKey()` which selects from the map of possible
+   `dataSources` the one that matches the current tenant_id, if none matches it will throw an exception. 
+
+![](determine_dataSource.png)
