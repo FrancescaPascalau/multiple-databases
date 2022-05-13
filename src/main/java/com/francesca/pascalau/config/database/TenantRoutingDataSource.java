@@ -12,6 +12,8 @@ public class TenantRoutingDataSource extends AbstractRoutingDataSource {
      */
     @Override
     protected Object determineCurrentLookupKey() {
-        return TenantContext.getCurrentTenant();
+        return TenantContext.getCurrentTenant() != null
+                ? TenantContext.getCurrentTenant()
+                : TenantContext.DEFAULT;
     }
 }

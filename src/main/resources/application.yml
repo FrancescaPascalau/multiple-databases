@@ -24,6 +24,11 @@ spring:
 
 tenants:
   datasources:
+    public:
+      jdbcUrl: jdbc:postgresql://localhost:5432/public
+      driver-class-name: org.postgresql.Driver
+      username: postgres
+      password: password
     tenant_1:
       jdbcUrl: jdbc:postgresql://localhost:5432/tenant_1
       driver-class-name: org.postgresql.Driver

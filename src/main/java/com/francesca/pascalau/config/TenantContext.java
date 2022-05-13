@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TenantContext {
 
+    public final static String DEFAULT = "public";
     private static ThreadLocal<String> currentTenant = new ThreadLocal<>();
 
     public static void setCurrentTenant(String tenant) {
