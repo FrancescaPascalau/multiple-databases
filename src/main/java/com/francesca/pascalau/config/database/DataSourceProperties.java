@@ -1,5 +1,7 @@
 package com.francesca.pascalau.config.database;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.stereotype.Component;
@@ -19,15 +21,31 @@ public class DataSourceProperties {
     }
 
     public void setDatasources(Map<String, Map<String, String>> datasources) {
-        datasources.forEach((key, value) -> this.datasources.put(key, convert(value)));
+        datasources.forEach((key, value) -> this.datasources.put(key, buildDataSource(value)));
     }
 
-    public DataSource convert(Map<String, String> source) {
-        return DataSourceBuilder.create()
-                .url(source.get("jdbcUrl"))
-                .driverClassName(source.get("driverClassName"))
-                .username(source.get("username"))
-                .password(source.get("password"))
-                .build();
+    private DataSource buildDataSource(Map<String, String> source) {
+        return getCustomHikariDataSource(
+                DataSourceBuilder.create()
+                        .url(source.get("jdbcUrl"))
+                        .driverClassName(source.get("driverClassName"))
+                        .username(source.get("username"))
+                        .password(source.get("password"))
+                        .build()
+        );
+    }
+
+    private HikariDataSource getCustomHikariDataSource(DataSource dataSource) {
+        return new HikariDataSource(setConnectionPoolProperties(dataSource));
+    }
+
+    private HikariConfig setConnectionPoolProperties(DataSource dataSource) {
+        HikariConfig hikariConfig = new HikariConfig();
+        hikariConfig.setDataSource(dataSource);
+        hikariConfig.setConnectionTimeout(20000);
+        hikariConfig.setMaximumPoolSize(10);
+        hikariConfig.setMaxLifetime(1800000);
+
+        return hikariConfig;
     }
 }
