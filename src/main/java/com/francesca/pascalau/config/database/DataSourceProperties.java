@@ -27,6 +27,7 @@ public class DataSourceProperties {
                 .url(source.get("jdbcUrl"))
                 .driverClassName(source.get("driverClassName"))
                 .username(source.get("username"))
+                .password(source.get("password"))
                 .build();
     }
 }
