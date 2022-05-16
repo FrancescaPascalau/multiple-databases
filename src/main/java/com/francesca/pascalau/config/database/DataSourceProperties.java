@@ -7,6 +7,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -45,7 +46,20 @@ public class DataSourceProperties {
         hikariConfig.setConnectionTimeout(20000);
         hikariConfig.setMaximumPoolSize(10);
         hikariConfig.setMaxLifetime(1800000);
+        setReadOnly(dataSource, hikariConfig);
 
         return hikariConfig;
+    }
+
+    private void setReadOnly(DataSource dataSource, HikariConfig hikariConfig) {
+        try {
+            String jdbcUrl = dataSource.getConnection().getMetaData().getURL();
+            String databaseName = jdbcUrl.substring(jdbcUrl.length() - 4);
+            if (databaseName.equals("read")) {
+                hikariConfig.setReadOnly(true);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

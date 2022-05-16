@@ -10,33 +10,18 @@ spring:
       ddl-auto: none
   flyway:
     enabled: false
-  sql:
-    init:
-      mode: always
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      connection-timeout: 20000 # maximum number of milliseconds that a client will wait for a connection
-      maximumPoolSize: 5 # the maximum number of connections in the pool
-      minimum-idle: 5 # minimum number of idle connections maintained by HikariCP in a connection pool
-      idle-timeout: 10000 # the number of seconds the pool will allow a connection to remain idle before closing it
-      max-lifetime: 1800000 # maximum lifetime in milliseconds of a connection in the pool after it is closed
-      auto-commit: true # controls the default auto-commit behavior of connections returned from the pool (default true)
 
 tenants:
   datasources:
-    public:
-      jdbcUrl: jdbc:postgresql://localhost:5432/public
+    read:
+      jdbcUrl: jdbc:postgresql://localhost:5432/read
       driver-class-name: org.postgresql.Driver
       username: postgres
       password: password
-    tenant_1:
-      jdbcUrl: jdbc:postgresql://localhost:5432/tenant_1
-      driver-class-name: org.postgresql.Driver
-      username: postgres
-      password: password
-    tenant_2:
-      jdbcUrl: jdbc:postgresql://localhost:5432/tenant_2
+    write:
+      jdbcUrl: jdbc:postgresql://localhost:5432/write
       driver-class-name: org.postgresql.Driver
       username: postgres
       password: password
