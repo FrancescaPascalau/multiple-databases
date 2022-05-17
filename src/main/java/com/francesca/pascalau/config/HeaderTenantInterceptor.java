@@ -8,10 +8,10 @@ import org.springframework.web.context.request.WebRequestInterceptor;
 @Component
 public class HeaderTenantInterceptor implements WebRequestInterceptor {
 
-    public static final String TENANT_HEADER = "X-TenantID";
+    private static final String TENANT_HEADER = "X-TenantID";
 
     /**
-     * 1. When a request is intercepted by the application, the header is checked so we can set the current tenant_id
+     * 1. When a request is intercepted by the application, the header is checked, so we can set the current tenant_id
      *
      * @param request the current web request
      */

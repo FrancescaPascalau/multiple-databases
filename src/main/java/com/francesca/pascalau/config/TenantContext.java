@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class TenantContext {
 
     public final static String DEFAULT = "public";
-    private static ThreadLocal<String> currentTenant = new ThreadLocal<>();
+    
+    private static final ThreadLocal<String> currentTenant = new ThreadLocal<>();
 
     public static void setCurrentTenant(String tenant) {
         currentTenant.set(tenant);
@@ -17,8 +18,6 @@ public class TenantContext {
 
     /**
      * 3. Find the current tenant_id that was set before handling the current request
-     *
-     * @return
      */
     public static String getCurrentTenant() {
         return currentTenant.get();

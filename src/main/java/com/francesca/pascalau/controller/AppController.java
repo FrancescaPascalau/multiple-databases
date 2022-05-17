@@ -33,14 +33,14 @@ public class AppController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> findById(@PathVariable(value = "id") Long employeeId) {
+    public ResponseEntity<Employee> findEmployeeById(@PathVariable(value = "id") Long employeeId) {
         Employee employee = employeeService.findEmployeeById(employeeId);
 
         return new ResponseEntity<>(employee, new HttpHeaders(), HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Employee> addNewEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         Employee saved = employeeService.save(employee);
 
         return new ResponseEntity<>(saved, new HttpHeaders(), HttpStatus.OK);

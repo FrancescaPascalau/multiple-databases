@@ -8,6 +8,8 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 public class TenantRoutingDataSource extends AbstractRoutingDataSource {
 
     /**
+     * PreHandle: When the application starts and the default dataSource is configured
+     * 
      * 2. Handling the request based on the tenant_id
      */
     @Override
